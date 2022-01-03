@@ -22,7 +22,7 @@ db.artistsnestedsongs.aggregate([
    "Artist": 1,
    "Songs": 1,
    "distinct_songs_count": { 
-     "$size": { "$setDifference": [ "$Songs", [] ] }
+     "$size": { "$setDifference": [ "$Songs.SLink", [] ] }
    } 
   }}
 ])
@@ -37,7 +37,7 @@ db.artistsnestedsongs.aggregate([
     {$reduce : {input : "$items", initialValue : [], in :{$setUnion:["$$value", "$$this"]}}} 
     }},
  {$unwind: '$items'},
-])
+]).itcount()
 
 
 //12. (3 points) - Give the number of artists having Folk among the genres
